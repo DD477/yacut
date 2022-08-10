@@ -5,7 +5,8 @@ from flask import jsonify, render_template
 
 from . import app, db
 from .constaints import (API_NAME_IS_BUSY, BAD_NAME, EMPTY_REQUEST,
-                         FIELD_IS_REQUIRED)
+                         FIELD_IS_REQUIRED, MAX_LEN_SHORT_URL,
+                         REG_PATTERN_FOR_VALIDATION)
 from .models import URL_map
 from .views import get_unique_short_id
 
@@ -53,7 +54,8 @@ def request_verification(data):
     )
     if not custom_id:
         custom_id = get_unique_short_id()
-    if re.search('[А-Яа-я !@%#.&*+$_{+-]', custom_id) or len(custom_id) >= 16:
+    if (re.search(REG_PATTERN_FOR_VALIDATION, custom_id) or
+            len(custom_id) >= MAX_LEN_SHORT_URL):
         raise InvalidAPIUsage(
             BAD_NAME, HTTPStatus.BAD_REQUEST
         )

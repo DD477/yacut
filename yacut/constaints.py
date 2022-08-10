@@ -4,6 +4,7 @@ MAX_LEN_ORIGINAL_URL = 256
 LEN_AUTO_SHORT_URL = 6
 MAX_LEN_SHORT_URL = 16
 REG_PATTERN = r'[A-Za-z0-9]'
+REG_PATTERN_FOR_VALIDATION = '[А-Яа-я !@%#.&*+$_{+-]'
 
 # Сообщения
 NAME_IS_BUSY = 'Имя {} уже занято!'
